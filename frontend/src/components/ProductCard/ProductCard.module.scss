@@ -1,0 +1,29 @@
+.productCard {
+    margin: 10px;
+    background: #efefef;
+    border-radius: 10px;
+    border: solid 1px #ccc;
+    overflow: hidden;
+}
+
+.cardDetails {
+    padding: 20px;
+    button {
+        padding: 1rem 2rem;
+        background: lightgreen;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        color: rgb(25, 103, 19);
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: rgb(25, 103, 19);
+        color: lightgreen;
+    }
+    p {
+        font-size: 1.2rem;
+        color: #2c2929;
+    }
+}
