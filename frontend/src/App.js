@@ -9,33 +9,6 @@ import ProductDetail from './components/ProductDetail/ProductDetail';
 import Footer from './components/Footer/Footer';
 
 function App() {
-    const [products, setProducts] = useState(null);
-
-    const getProducts = async () => {
-        const res = await sanityClient.fetch(`
-        *[_type == "product"]{
-            _id,
-            blurb{
-            en
-          },
-          defaultProductVariant{
-            images,
-            price
-            
-          },
-            
-          }
-        `);
-
-        setProducts(res);
-    };
-
-    useEffect(() => {
-        getProducts();
-    }, []);
-
-    if (!products) return null;
-
     return (
         <div className='App'>
             <Router>
