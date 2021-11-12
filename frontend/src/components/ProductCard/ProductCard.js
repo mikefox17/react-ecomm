@@ -1,17 +1,29 @@
 import styles from './ProductCard.module.scss';
+import { Link } from 'react-router-dom';
+import sanityClient from '../../client';
+import imageUrlBuilder from '@sanity/image-url';
 
-const ProductCard = ({ blurb, details }) => {
-    console.log(details);
+const builder = imageUrlBuilder(sanityClient);
+
+function urlFor(source) {
+    return builder.image(source);
+}
+
+const ProductCard = ({ blurb, details, id }) => {
     const { images } = details;
-    console.log(images);
+    const {
+        asset: { _ref: imgSRC },
+    } = images[0];
+
     return (
         <div className={styles.productCard}>
-            <div className={styles.productImage}>
-                <img
-                    src='https://images.pexels.com/photos/1159670/pexels-photo-1159670.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
-                    alt='Boot'
-                />
-            </div>
+            <Link to={`/products/${id}`}>
+                {' '}
+                <div className={styles.productImage}>
+                    <img src={urlFor(imgSRC).width(200).url()} alt='Boot' />
+                </div>
+            </Link>
+
             <div className={styles.cardDetails}>
                 <p className={styles.productPrice}>Price: {details.price}</p>
                 <p className={styles.productDescription}>{blurb.en}</p>

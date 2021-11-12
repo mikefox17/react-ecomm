@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import sanityClient from './client';
 import styles from './styles/Home.module.scss';
 import Container from './components/Container/Container';
+import ProductList from './components/ProductList/ProductList';
 import Header from './components/Header/Header';
-import ProductCard from './components/ProductCard/ProductCard';
+import ProductDetail from './components/ProductDetail/ProductDetail';
+import Footer from './components/Footer/Footer';
 
 function App() {
     const [products, setProducts] = useState(null);
@@ -30,34 +33,24 @@ function App() {
     useEffect(() => {
         getProducts();
     }, []);
-    console.log(products);
 
     if (!products) return null;
 
     return (
         <div className='App'>
-            <Header></Header>
-            <Container>
-                <div>
-                    <h1>Hello World</h1>
-
-                    <div className={styles.productsGrid}>
-                        {products.map(product => {
-                            const { blurb, defaultProductVariant: details } =
-                                product;
-                            console.log(blurb, details);
-
-                            return (
-                                <ProductCard
-                                    key={product._id}
-                                    blurb={blurb}
-                                    details={details}
-                                ></ProductCard>
-                            );
-                        })}
-                    </div>
-                </div>
-            </Container>
+            <Router>
+                <Header />
+                <Container>
+                    <Routes>
+                        <Route exact path='/' element={<ProductList />} />
+                        <Route
+                            path='/products/:id'
+                            element={<ProductDetail />}
+                        />
+                    </Routes>
+                </Container>
+                <Footer />
+            </Router>
         </div>
     );
 }
