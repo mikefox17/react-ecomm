@@ -27,7 +27,17 @@ const ProductCard = ({ blurb, details, id }) => {
             <div className={styles.cardDetails}>
                 <p className={styles.productPrice}>Price: {details.price}</p>
                 <p className={styles.productDescription}>{blurb.en}</p>
-                <button>ADD TO CART</button>
+                <button
+                    class='snipcart-add-item'
+                    data-item-id={id}
+                    data-item-price={details.price}
+                    data-item-url='/paintings/starry-night'e
+                    data-item-description='High-quality replica of The Starry Night by the Dutch post-impressionist painter Vincent van Gogh.'
+                    data-item-image='/assets/images/starry-night.jpg'
+                    data-item-name='The Starry Night'
+                >
+                    Add to cart
+                </button>
             </div>
         </div>
     );
